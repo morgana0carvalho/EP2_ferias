@@ -43,3 +43,29 @@ def faz_jogada(tabuleiro, linha, coluna):
         tabuleiro[linha][coluna] = "X"
 
     return tabuleiro
+
+#posiciona frota
+def  posiciona_frota(lista_frota):
+    tabuleiro_n_atualizado = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+    for dic in lista_frota:
+        for lista_coordenadas in dic["posicoes"]:
+            l = lista_coordenadas[0]
+            c = lista_coordenadas[1]
+            
+            tabuleiro_n_atualizado[l][c] = 1
+
+    tabuleiro = tabuleiro_n_atualizado
+
+    return tabuleiro
