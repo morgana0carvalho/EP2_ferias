@@ -69,3 +69,22 @@ def  posiciona_frota(lista_frota):
     tabuleiro = tabuleiro_n_atualizado
 
     return tabuleiro
+
+
+#Quantas embarcações afundadas?
+def afundados(lista_informacoes, tabuleiro_atual):
+    afundou = 0
+    x = 0
+
+    for dic in lista_informacoes:
+        for coordenadas in dic["posicoes"]:
+            l = coordenadas[0]
+            c = coordenadas[1]
+            if tabuleiro_atual[l][c] =="X":
+                x+=1
+            else:
+                break 
+        if x == len(dic["posicoes"]):
+            afundou+=1
+        x = 0
+    return afundou
