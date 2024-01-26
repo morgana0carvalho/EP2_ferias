@@ -177,3 +177,51 @@ def gerando_frota_automaticamente():
 
     return frota
 
+
+# Gerando frota de forma aleatório para jogadores
+frota_jogador = gerando_frota_automaticamente()
+frota_oponente = gerando_frota_automaticamente()
+
+# Criando tabuleiro com as frotas posicionadas
+tabuleiro_jogador = posiciona_frota(frota_jogador)
+tabuleiro_oponente = posiciona_frota(frota_oponente)
+jogando = True
+coordenadas_ja_informadas = []
+while jogando:
+
+    # Imprimindo tabuleiro
+    print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
+
+
+    validacao = True
+    while validacao:
+        
+        linha = int(input('Qual linha deseja atacar?: '))
+        while linha > 9 or linha < 0:
+            print('Linha inválida!')
+            linha = int(input('Qual linha deseja atacar?: '))
+
+        
+        coluna = int(input('Qual coluna deseja atacar: '))
+
+        while coluna < 0 or coluna > 9:
+            print('Coluna inválida!')
+            coluna = int(input('Qual coluna deseja atacar: '))
+
+   
+        if [linha, coluna] in coordenadas_ja_informadas:
+            print(f'A posição linha {linha} e coluna {coluna} já foi informada anteriormente!')
+        else:
+            validacao = False
+            coordenadas_ja_informadas.append([linha, coluna])
+
+    resultado_jogada = faz_jogada(tabuleiro_oponente, linha, coluna)
+
+    if resultado_jogada == 'X':
+        print('Parabéns! Você acertou um navio do oponente!')
+
+
+    if afundados(frota_oponente, tabuleiro_oponente) == len(frota_oponente):
+        print('Parabéns! Você derrubou todos os navios do seu oponente!')
+        jogando = False
+

@@ -72,7 +72,6 @@ def  posiciona_frota(lista_frota):
     return tabuleiro
 
 
-#Quantas embarcações afundadas?
 def afundados(lista_informacoes, tabuleiro_atual):
     afundou = 0
     x = 0
@@ -81,12 +80,12 @@ def afundados(lista_informacoes, tabuleiro_atual):
         for coordenadas in dic["posicoes"]:
             l = coordenadas[0]
             c = coordenadas[1]
-            if tabuleiro_atual[l][c] =="X":
-                x+=1
+            if tabuleiro_atual[l][c] == "X":
+                x += 1
             else:
-                break 
+                break
         if x == len(dic["posicoes"]):
-            afundou+=1
+            afundou += 1
         x = 0
     return afundou
 
@@ -104,8 +103,6 @@ def posicao_valida(dic_info, lista_frota):
                     return False
     
     return True
-
-import random
 
 # PARA TESTAS O SEU CÓDIGO NA ACADEMIA PYTHON SERÁ NECESSÁRIO COLAR AS FUNÇÕES DESENVOLVIDAS AQUI!!!
 
@@ -187,6 +184,7 @@ tabuleiro_jogador = posiciona_frota(frota_jogador)
 tabuleiro_oponente = posiciona_frota(frota_oponente)
 jogando = True
 coordenadas_ja_informadas = []
+
 while jogando:
 
     # Imprimindo tabuleiro
@@ -224,3 +222,24 @@ while jogando:
     if afundados(frota_oponente, tabuleiro_oponente) == len(frota_oponente):
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
+    
+    
+    # Jogada do oponente
+    linha_op = random.randint(0, 9)
+    coluna_op = random.randint(0, 9)
+
+    while tabuleiro_jogador[linha_op][coluna_op] != 0:
+        linha_op = random.randint(0, 9)
+        coluna_op = random.randint(0, 9)
+
+        print(f'Seu oponente está atacando na linha {linha_op} e coluna {coluna_op}')
+
+        resultado_jogada = faz_jogada(tabuleiro_jogador, linha_op, coluna_op)
+
+        if resultado_jogada == 'X':
+            print('Seu oponente acertou um de seus navios!')
+
+        if afundados(frota_jogador, tabuleiro_jogador) == len(frota_jogador):
+            print('Xi! O oponente derrubou toda a sua frota =(')
+            jogando = False
+    
