@@ -90,16 +90,15 @@ def afundados(lista_informacoes, tabuleiro_atual):
         x = 0
     return afundou
 
-def posicao_valida(dados_de_posicao, frota):
-    
-    novas_posicoes = define_posicoes(dados_de_posicao)
+def posicao_valida(dic_info, lista_frota):
+    novas_posicoes = define_posicoes(dic_info)
 
     for posicao in novas_posicoes:
         linha, coluna = posicao
 
         if linha < 0 or linha >= 10 or coluna < 0 or coluna >= 10:
             return False
-        for navio in frota:
+        for navio in lista_frota:
             for posicao_navio in navio['posicoes']:
                 if posicao_navio == posicao:
                     return False
@@ -108,25 +107,29 @@ def posicao_valida(dados_de_posicao, frota):
 
 import random
 
-def gerando_frota_automaticamente(tabuleiro_oponente, frota_oponente):
+def gerando_frota_automaticamente():
     coordenadas_informadas = []
 
     while True:
         while True:
-            linha = input("qual a linha? ")
-            if linha.isnumeric() and '0' <= linha <= '9':
-                linha = int(linha)
+            try:
+                linha = int(input("qual a linha? "))
                 if 0 <= linha <= 9:
                     break
-            print("Linha inválida!")
+                else:
+                    print("Linha inválida! Digite um número entre 0 e 9.")
+            except ValueError:
+                print("Linha inválida! Digite um número inteiro.")
 
         while True:
-            coluna = input("qual a coluna? ")
-            if coluna.isnumeric() and '0' <= coluna <= '9':
-                coluna = int(coluna)
+            try:
+                coluna = int(input("qual a coluna? "))
                 if 0 <= coluna <= 9:
                     break
-            print("Coluna inválida!")
+                else:
+                    print("Coluna inválida! Digite um número entre 0 e 9.")
+            except ValueError:
+                print("Coluna inválida! Digite um número inteiro.")
 
         if (linha, coluna) in coordenadas_informadas:
             print(f"A posição linha {linha} e coluna {coluna} já foi informada anteriormente!")
@@ -145,4 +148,3 @@ frota_oponente = gerando_frota_automaticamente()
 tabuleiro_jogador = posiciona_frota(frota_jogador)
 tabuleiro_oponente = posiciona_frota(frota_oponente)
 
-jogo_iterativo(tabuleiro_oponente, frota_oponente)
