@@ -88,3 +88,19 @@ def afundados(lista_informacoes, tabuleiro_atual):
             afundou+=1
         x = 0
     return afundou
+
+def posicao_valida(dados_de_posicao, frota):
+    
+    novas_posicoes = define_posicoes(dados_de_posicao)
+
+    for posicao in novas_posicoes:
+        linha, coluna = posicao
+
+        if linha < 0 or linha >= 10 or coluna < 0 or coluna >= 10:
+            return False
+        for navio in frota:
+            for posicao_navio in navio['posicoes']:
+                if posicao_navio == posicao:
+                    return False
+    
+    return True
