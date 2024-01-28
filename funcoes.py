@@ -1,4 +1,6 @@
 import random
+
+
 #defina posiçao 
 def define_posicoes(dic_info):
     lista_posicao = []
@@ -109,10 +111,6 @@ def posicao_valida(dic_info,lista_frota):
                 return False
                    
     return True       
-
-import random
-
-# PARA TESTAS O SEU CÓDIGO NA ACADEMIA PYTHON SERÁ NECESSÁRIO COLAR AS FUNÇÕES DESENVOLVIDAS AQUI!!!
 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     '''
