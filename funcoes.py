@@ -90,20 +90,25 @@ def afundados(lista_informacoes, tabuleiro_atual):
         x = 0
     return afundou
 
-def posicao_valida(dic_info, lista_frota):
-    novas_posicoes = define_posicoes(dic_info)
+#posicao valida
+def posicao_valida(dic_info,lista_frota):
 
-    for posicao in novas_posicoes:
-        linha, coluna = posicao
+    lista_nova_posicoes = define_posicoes(dic_info)
+
+    for posicao in lista_nova_posicoes:
+        #linha , coluna = posicao
+
+        linha = posicao[0]
+        coluna = posicao[1]
 
         if linha < 0 or linha >= 10 or coluna < 0 or coluna >= 10:
             return False
-        for navio in lista_frota:
-            for posicao_navio in navio['posicoes']:
-                if posicao_navio == posicao:
-                    return False
-    
-    return True
+
+        for navio_dic in lista_frota :
+            if posicao in navio_dic["posicoes"]:
+                return False
+                   
+    return True       
 
 import random
 
